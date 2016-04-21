@@ -1,0 +1,58 @@
+1.
+
+a) 3.33
+
+b) 2.88
+El speedup es 1.15625
+
+c)
+
+(hemos hecho lo del objdump con uno y otro)
+
+el SET
+el LONGDIV
+el SUBSTRACT
+el DIVIDE
+el MULTIPLY
+el progress
+
+
+d) 
+
+al hacer inlining ha pasao de:
+	- hacer divides a hacer shifts
+	- hacer multiplys a hacer LEAs
+
+e)
+
+con la macro hace el mismo time que sin macro + inline 
+
+
+
+2.
+
+a) time: 0.6
+
+>>> ((((6*4)+(7))*4) +5)*4
+Instr: 516
+
+b) 
+	time: 0.30
+
+
+>>> ((((22*4)+(7))*4) )
+Instrucc: 380
+
+c) time: 0.28
+
+Instrcsnes: 70*4
+
+d) time: 0.13
+Instr: 272
+
+e) el full unrolling hace memoization y es el mas mega de bueno
+
+f) time: 0.35
+
+
+
