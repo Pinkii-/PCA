@@ -18,7 +18,6 @@ el progress
 
 
 d) 
-
 al hacer inlining ha pasao de:
 	- hacer divides a hacer shifts
 	- hacer multiplys a hacer LEAs
