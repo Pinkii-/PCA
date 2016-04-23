@@ -48,7 +48,10 @@ u = r*10+x[k];\
 r=d5_r[u];\
 x[k]=d5_q[u];\
 }
-void DIVIDE5(char *x)
+
+
+inline void DIVIDE5(char *x) __attribute__((always_inline));
+inline void DIVIDE5(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
@@ -70,32 +73,50 @@ u = r*10+x[k];\
 r=d25_r[u];\
 x[k]=d25_q[u];\
 }
-void DIVIDE25(char *x)
+
+inline void DIVIDE25(char *x) __attribute__((always_inline));
+
+inline void DIVIDE25(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
 	
 	r = 0;
-	for (k = 0; k <= (N4); k+=1)
+	for (k = 0; k <= (N4)-4; k+=4)
 	{
 		DIV25_INN(k);
+		DIV25_INN(k+1);
+		DIV25_INN(k+2);
+		DIV25_INN(k+3);
 	}
 	for (;k<=N4;++k){DIV25_INN(k)};
 }
 
+#define DIV239_INN(k__) {\
+u=r*10+x[k__];\
+r=d239_r[u];\
+x[k__]=d239_q[u];\
+}\
 
-void DIVIDE239(char *x)
+inline void DIVIDE239(char *x) __attribute__((always_inline));
+
+inline void DIVIDE239(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
 	
 	r = 0;
-	for (k = 0; k <= N4; ++k)
+	for (k = 0; k <= N4-4; k+=4)
 	{
-        u = r * 10 + x[k];                       
-        r = d239_r[u];
-        x[k] = d239_q[u];
+		DIV239_INN(k);
+		DIV239_INN(k+1);
+		DIV239_INN(k+2);
+		DIV239_INN(k+3);
+//        u = r * 10 + x[k];                       
+//        r = d239_r[u];
+//        x[k] = d239_q[u];
 	}
+	for (;k<=N4;k++){DIV239_INN(k);};
 }
 
 #define DIVIDE_INNER(___x, ___k, ___n) {\
@@ -120,7 +141,10 @@ DIVIDE_INNER(__x,k_+4,__n);\
 for(;k_ <= N4;++k_) {DIVIDE_INNER(__x,k_,__n);}\
 })\
 
-void MULTIPLY( char *x, int n )                        
+
+inline void MULTIPLY( char *x, int n ) __attribute__((always_inline));
+
+inline void MULTIPLY( char *x, int n )                        
 {                                            
     int j, k;
     unsigned q, r, u;
@@ -198,6 +222,8 @@ void calculate( void )
     SET( a, 0 );
     SET( b, 0 );
 
+	int prog = 0;
+
     for( j = 2 * N4 + 1; j >= 3; j -= 2 )
     {
         SET( c, 1 );
@@ -210,7 +236,8 @@ void calculate( void )
         DIVIDE239(b);//DIVIDE( b, 239 );
         DIVIDE239(b);//DIVIDE( b, 239 );
 
-        progress();
+//        progress();
+		prog++;
     }
 
     SET( c, 1 );
@@ -225,7 +252,12 @@ void calculate( void )
     SUBTRACT( a, a, b );
     MULTIPLY( a, 4 );
 
-    progress();
+    //progress();
+	prog++;
+	char* pp = (char*)malloc(sizeof(char)*prog);
+	memset(pp, '.', sizeof(char)*prog);
+	printf("%s", pp);
+	free(pp);
 }
 
 /*
