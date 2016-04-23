@@ -44,47 +44,31 @@ void pre_init()
 	}	
 }
 
-
-#define DIV5_INN(k) {\
-u = r*10+x[k];\
-r=d5_r[u];\
-x[k]=d5_q[u];\
-}
 void DIVIDE5(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
 	
-
 	r = 0;
-	for (k = 0; k <= (N4-5); k+=5)
+	for (k = 0; k <= N4; ++k)
 	{
-	DIV5_INN(k);
-	DIV5_INN(k+1);
-	DIV5_INN(k+2);
-	DIV5_INN(k+3);
-	DIV5_INN(k+4);
+        u = r * 10 + x[k];                       
+        r = d5_r[u];
+        x[k] = d5_q[u];
 	}
-	for (;k<=N4;++k){DIV5_INN(k)};
 }
-
-#define DIV25_INN(k) {\
-u = r*10+x[k];\
-r=d25_r[u];\
-x[k]=d25_q[u];\
-}
-
 void DIVIDE25(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
 	
 	r = 0;
-	for (k = 0; k <= (N4); k+=1)
+	for (k = 0; k <= N4; ++k)
 	{
-	DIV25_INN(k);
+        u = r * 10 + x[k];                       
+        r = d25_r[u];
+        x[k] = d25_q[u];
 	}
-	for (;k<=N4;++k){DIV25_INN(k)};
 }
 void DIVIDE239(char *x)
 {
@@ -100,53 +84,77 @@ void DIVIDE239(char *x)
 	}
 }
 
-#define DIVIDE_INNER(___x, ___k, ___n) {\
-	u = r * 10 + ___x[___k];\
-        q = u / ___n;\
-        r = u - q * ___n;\
-        ___x[___k] = q;\
-}
 
-#define DIVIDE(__x, __n) ({\
-int k;\
-unsigned q, r, u;\
-long v;\
-r = 0;\
-for( k = 0; k <= (N4-5); k+=5){\
-DIVIDE_INNER(__x,k,__n);\
-DIVIDE_INNER(__x,k+1,__n);\
-DIVIDE_INNER(__x,k+2,__n);\
-DIVIDE_INNER(__x,k+3,__n);\
-DIVIDE_INNER(__x,k+4,__n);\
+#define DIVIDE(__x, __n) {\                                                int _j, _k;\
+    unsigned _q, _r, _u;\
+    long _v;\
+\
+    _r = 0;\
+    for( _k = 0; _k <= N4; _k++ )\
+    {\
+        _u = _r * 10 + _x[_k];\
+        _q = _u / _n;\
+        _r = _u - _q * _n;\
+        _x[_k] = _q;\
+    }\
 }\
-for(;k <= N4;++k) {DIVIDE_INNER(__x,k,__n);}\
-})
-
 
 /*
-#define K_UNROLL_DIVIDE 5
-
-inline void DIVIDE( char *x, int n ) __attribute__((always_inline));
 void DIVIDE( char *x, int n )                           
-{                 
-                               
+{                                                
     int j, k;
     unsigned q, r, u;
     long v;
 
     r = 0;                                       
-    for( k = 0; k <= (N4-K_UNROLL_DIVIDE); k += K_UNROLL_DIVIDE)                  
+    for( k = 0; k <= N4; k++ )                  
     {                                            
-	DIVIDE_INNER(k);
-	DIVIDE_INNER(k+1);
-	DIVIDE_INNER(k+2);
-	DIVIDE_INNER(k+3);
-	DIVIDE_INNER(k+4);
-    }
-
-    for(;k <= N4;++k) DIVIDE_INNER(k);
+        u = r * 10 + x[k];                   
+        q = u / n;                               
+        r = u - q * n;                           
+        x[k] = q;                        
+    }                                           
 }
 */
+
+void LONGDIV( char *x, int n )                          
+{                                                
+    int j, k;
+    unsigned q, r, u;
+    long v;
+
+    if( n < 6553 )                               
+    {                                            
+        r = 0;                                   
+        for( k = 0; k <= N4; k++ )               
+        {                                        
+            u = r * 10 + x[k];                   
+            q = u / n;                           
+            r = u - q * n;                       
+            x[k] = q;                            
+        }                                       
+    }                                            
+    else                                         
+    {                                            
+        r = 0;                                   
+        for( k = 0; k <= N4; k++ )              
+        {                                       
+            if( r < 6553 )                      
+            {                                   
+                u = r * 10 + x[k];              
+                q = u / n;                      
+                r = u - q * n;                  
+            }                                   
+            else                                
+            {                                   
+                v = (long) r * 10 + x[k];       
+                q = v / n;                      
+                r = v - q * n;                  
+            }                                   
+            x[k] = q;                           
+        }                                       
+    }                                           
+}
 
 void MULTIPLY( char *x, int n )                        
 {                                            
@@ -222,7 +230,7 @@ void calculate( void )
     for( j = 2 * N4 + 1; j >= 3; j -= 2 )
     {
         SET( c, 1 );
-        DIVIDE( c, j );
+        LONGDIV( c, j );
 	
 
         SUBTRACT( a, c, a );
