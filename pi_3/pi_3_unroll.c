@@ -142,20 +142,30 @@ for(;k_ <= N4;++k_) {DIVIDE_INNER(__x,k_,__n);}\
 })\
 
 
-inline void MULTIPLY( char *x, int n ) __attribute__((always_inline));
+#define MUL_INN(k) {\
+q=n*x[k]+r;\
+r=q/10;\
+x[k]=q-r*10;\
+}
 
+inline void MULTIPLY( char *x, int n ) __attribute__((always_inline));
 inline void MULTIPLY( char *x, int n )                        
 {                                            
     int j, k;
     unsigned q, r, u;
     long v;
     r = 0;                                   
-    for( k = N4; k >= 0; k-- )               
+    for( k = N4; k >= 4; k-=4 )               
     {                                        
-        q = n * x[k] + r;                    
-        r = q / 10;                          
-        x[k] = q - r * 10;                   
+		MUL_INN(k);
+		MUL_INN(k-1);
+		MUL_INN(k-2);
+		MUL_INN(k-3);
+//        q = n * x[k] + r;                    
+//        r = q / 10;                          
+//        x[k] = q - r * 10;                   
     }                                        
+	for(;k>=0;k--){MUL_INN(k);}
 }
 
 void SET( char *x, int n )                              
