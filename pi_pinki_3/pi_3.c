@@ -213,7 +213,7 @@ void SET( char *x, int n )
 	msm_r=0;\
 	int sub_mask;\
 	unsigned multiply_q,multiply_r;\
-	for(msm_k=N4;msm_k>=3;msm_k-=4){\
+	for(msm_k=N4;msm_k>=4;msm_k-=5){\
 	MULTIPLY_INN(msm_k,msm_x);\
 	SUBTRACT_INN(msm_k,msm_x,msm_y,msm_z);\
 	MULTIPLY_INN(msm_k,msm_x);\
@@ -230,7 +230,7 @@ void SET( char *x, int n )
 	SUBTRACT_INN(msm_k-4,msm_x,msm_y,msm_z);\
 	MULTIPLY_INN(msm_k-4,msm_x);\
 	}\
-	for(;msm_k>=0;msm_k--){\
+	for(msm_k=N4;msm_k>=0;msm_k--){\
 	MULTIPLY_INN(msm_k,msm_x);\
 	SUBTRACT_INN(msm_k,msm_x,msm_y,msm_z);\
 	MULTIPLY_INN(msm_k,msm_x);\
@@ -317,7 +317,7 @@ void calculate( void )
 //    SUBTRACT( a, a, b );
 //    MULTIPLY4( a);
 
-	MUL4_SUB_MUL4(a,a,b);
+	// MUL4_SUB_MUL4(a,a,b);
 
     progress();
     printProgress();
