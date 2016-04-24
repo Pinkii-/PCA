@@ -5,6 +5,7 @@
 int N, N4;
 char a[25480], b[25480], c[25480];
 char string[100];
+int nCalculates;
 
 #define D5_RANGE 4*10+9 +1
 unsigned d5_q[D5_RANGE];
@@ -22,6 +23,7 @@ unsigned d239_r[D239_RANGE];
 
 void pre_init()
 {
+    nCalculates = 0;
 	int i;
 
 	//DIV5
@@ -85,18 +87,17 @@ void DIVIDE239(char *x)
 }
 
 
-#define DIVIDE(__x, __n) {\
-    int _j, _k;\
-    unsigned _q, _r, _u;\
-    long _v;\
+#define DIVIDE(divide_x, divide_n) {\
+    int divide_k;\
+    unsigned divide_q, divide_r, divide_u;\
 \
-    _r = 0;\
-    for( _k = 0; _k <= N4; _k++ )\
+    divide_r = 0;\
+    for( divide_k = 0; divide_k <= N4; divide_k++ )\
     {\
-        _u = _r * 10 + _x[_k];\
-        _q = _u / _n;\
-        _r = _u - _q * _n;\
-        _x[_k] = _q;\
+        divide_u = divide_r * 10 + divide_x[divide_k];\
+        divide_q = divide_u / divide_n;\
+        divide_r = divide_u - divide_q * divide_n;\
+        divide_x[divide_k] = divide_q;\
     }\
 }\
 
@@ -196,6 +197,7 @@ void SUBTRACT( char *x, char *y, char *z )
 
 void calculate( void );
 void progress( void );
+void printProgress( void );
 void epilog( void );
 
 
@@ -231,7 +233,7 @@ void calculate( void )
     for( j = 2 * N4 + 1; j >= 3; j -= 2 )
     {
         SET( c, 1 );
-        LONGDIV( c, j );
+        DIVIDE( c, j );
 	
 
         SUBTRACT( a, c, a );
@@ -257,11 +259,12 @@ void calculate( void )
     MULTIPLY( a, 4 );
 
     progress();
+    printProgress();
 }
 
 /*
 
- N = 10000                      
+ N = 10000                      printf
  A = 0                          
  B = 0                          
  J = 2 * (N + 4) + 1            
@@ -277,7 +280,13 @@ void calculate( void )
 
 void progress( void )
 {
-    printf(".");
+    ++nCalculates;
+}
+
+void printProgress( void ) {
+    char progresBuffer[nCalculates];
+    memset(progresBuffer,'.',nCalculates);
+    printf(progresBuffer);
 }
 
 void epilog( void )
