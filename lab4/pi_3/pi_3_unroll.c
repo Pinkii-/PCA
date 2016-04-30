@@ -18,8 +18,6 @@ unsigned d25_r[D25_RANGE];
 unsigned d239_q[D239_RANGE];
 unsigned d239_r[D239_RANGE];
 
-
-
 void pre_init()
 {
 	int i;
@@ -50,12 +48,14 @@ u = r*10+x[k];\
 r=d5_r[u];\
 x[k]=d5_q[u];\
 }
-void DIVIDE5(char *x)
+
+
+inline void DIVIDE5(char *x) __attribute__((always_inline));
+inline void DIVIDE5(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
 	
-
 	r = 0;
 	for (k = 0; k <= (N4-5); k+=5)
 	{
@@ -74,30 +74,49 @@ r=d25_r[u];\
 x[k]=d25_q[u];\
 }
 
-void DIVIDE25(char *x)
+inline void DIVIDE25(char *x) __attribute__((always_inline));
+
+inline void DIVIDE25(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
 	
 	r = 0;
-	for (k = 0; k <= (N4); k+=1)
+	for (k = 0; k <= (N4)-4; k+=4)
 	{
-	DIV25_INN(k);
+		DIV25_INN(k);
+		DIV25_INN(k+1);
+		DIV25_INN(k+2);
+		DIV25_INN(k+3);
 	}
 	for (;k<=N4;++k){DIV25_INN(k)};
 }
-void DIVIDE239(char *x)
+
+#define DIV239_INN(k__) {\
+u=r*10+x[k__];\
+r=d239_r[u];\
+x[k__]=d239_q[u];\
+}\
+
+inline void DIVIDE239(char *x) __attribute__((always_inline));
+
+inline void DIVIDE239(char *x)
 {
 	int j, k;
 	unsigned q, r, u;
 	
 	r = 0;
-	for (k = 0; k <= N4; ++k)
+	for (k = 0; k <= N4-4; k+=4)
 	{
-        u = r * 10 + x[k];                       
-        r = d239_r[u];
-        x[k] = d239_q[u];
+		DIV239_INN(k);
+		DIV239_INN(k+1);
+		DIV239_INN(k+2);
+		DIV239_INN(k+3);
+//        u = r * 10 + x[k];                       
+//        r = d239_r[u];
+//        x[k] = d239_q[u];
 	}
+	for (;k<=N4;k++){DIV239_INN(k);};
 }
 
 #define DIVIDE_INNER(___x, ___k, ___n) {\
@@ -108,58 +127,45 @@ void DIVIDE239(char *x)
 }
 
 #define DIVIDE(__x, __n) ({\
-int k;\
+int k_;\
 unsigned q, r, u;\
 long v;\
 r = 0;\
-for( k = 0; k <= (N4-5); k+=5){\
-DIVIDE_INNER(__x,k,__n);\
-DIVIDE_INNER(__x,k+1,__n);\
-DIVIDE_INNER(__x,k+2,__n);\
-DIVIDE_INNER(__x,k+3,__n);\
-DIVIDE_INNER(__x,k+4,__n);\
+for( k_ = 0; k_ <= (N4-5); k_+=5){\
+DIVIDE_INNER(__x,k_,__n);\
+DIVIDE_INNER(__x,k_+1,__n);\
+DIVIDE_INNER(__x,k_+2,__n);\
+DIVIDE_INNER(__x,k_+3,__n);\
+DIVIDE_INNER(__x,k_+4,__n);\
 }\
-for(;k <= N4;++k) {DIVIDE_INNER(__x,k,__n);}\
-})
+for(;k_ <= N4;++k_) {DIVIDE_INNER(__x,k_,__n);}\
+})\
 
 
-/*
-#define K_UNROLL_DIVIDE 5
-
-inline void DIVIDE( char *x, int n ) __attribute__((always_inline));
-void DIVIDE( char *x, int n )                           
-{                 
-                               
-    int j, k;
-    unsigned q, r, u;
-    long v;
-
-    r = 0;                                       
-    for( k = 0; k <= (N4-K_UNROLL_DIVIDE); k += K_UNROLL_DIVIDE)                  
-    {                                            
-	DIVIDE_INNER(k);
-	DIVIDE_INNER(k+1);
-	DIVIDE_INNER(k+2);
-	DIVIDE_INNER(k+3);
-	DIVIDE_INNER(k+4);
-    }
-
-    for(;k <= N4;++k) DIVIDE_INNER(k);
+#define MUL_INN(k) {\
+q=n*x[k]+r;\
+r=q/10;\
+x[k]=q-r*10;\
 }
-*/
 
-void MULTIPLY( char *x, int n )                        
+inline void MULTIPLY( char *x, int n ) __attribute__((always_inline));
+inline void MULTIPLY( char *x, int n )                        
 {                                            
     int j, k;
     unsigned q, r, u;
     long v;
     r = 0;                                   
-    for( k = N4; k >= 0; k-- )               
+    for( k = N4; k >= 4; k-=4 )               
     {                                        
-        q = n * x[k] + r;                    
-        r = q / 10;                          
-        x[k] = q - r * 10;                   
+		MUL_INN(k);
+		MUL_INN(k-1);
+		MUL_INN(k-2);
+		MUL_INN(k-3);
+//        q = n * x[k] + r;                    
+//        r = q / 10;                          
+//        x[k] = q - r * 10;                   
     }                                        
+	for(;k>=0;k--){MUL_INN(k);}
 }
 
 void SET( char *x, int n )                              
@@ -169,26 +175,34 @@ void SET( char *x, int n )
 }
 
 
-void SUBTRACT( char *x, char *y, char *z )                      
-{                                                
+#define SUB_INNER(k) {\
+if( (x[k] = y[k] - z[k]) < 0 ){\
+x[k] += 10;z[k-1]++;}}\
+
+ 
+inline void SUBTRACT( char *x, char *y, char *z ) __attribute__((always_inline));
+
+inline void SUBTRACT( char *x, char *y, char *z )                     {                                                
     int j, k;
     unsigned q, r, u;
     long v;
-    for( k = N4; k >= 0; k-- )                   
-    {                                            
-        if( (x[k] = y[k] - z[k]) < 0 )           
-        {                                        
-            x[k] += 10;                          
-            z[k-1]++;                            
-        }                                        
+    for( k = N4; k >= 8; k-= 8)                   
+    {
+		SUB_INNER(k);
+		SUB_INNER(k-1);
+		SUB_INNER(k-2);
+		SUB_INNER(k-3);
+		SUB_INNER(k-4);
+		SUB_INNER(k-5);
+		SUB_INNER(k-6);
+		SUB_INNER(k-7);
     }                                            
+    for( ; k >= 0; k-- ) {SUB_INNER(k)};
 }
-
 
 void calculate( void );
 void progress( void );
 void epilog( void );
-
 
 int main( int argc, char *argv[] )
 {
@@ -198,7 +212,6 @@ int main( int argc, char *argv[] )
         N = atoi(argv[1]);
 
     setbuf(stdout, NULL);
-
 
 	//Memoization 
 	pre_init();
@@ -219,11 +232,12 @@ void calculate( void )
     SET( a, 0 );
     SET( b, 0 );
 
+	int prog = 0;
+
     for( j = 2 * N4 + 1; j >= 3; j -= 2 )
     {
         SET( c, 1 );
         DIVIDE( c, j );
-	
 
         SUBTRACT( a, c, a );
         DIVIDE25(a);//DIVIDE( a, 25 );
@@ -232,7 +246,8 @@ void calculate( void )
         DIVIDE239(b);//DIVIDE( b, 239 );
         DIVIDE239(b);//DIVIDE( b, 239 );
 
-        progress();
+//        progress();
+		prog++;
     }
 
     SET( c, 1 );
@@ -247,7 +262,12 @@ void calculate( void )
     SUBTRACT( a, a, b );
     MULTIPLY( a, 4 );
 
-    progress();
+    //progress();
+	prog++;
+	char* pp = (char*)malloc(sizeof(char)*prog);
+	memset(pp, '.', sizeof(char)*prog);
+	printf("%s", pp);
+	free(pp);
 }
 
 /*

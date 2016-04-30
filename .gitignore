@@ -30,3 +30,10 @@
 
 # Debug files
 *.dSYM/
+pi_0_macrodiv/pi_0_macrodiv.3
+pi_2_nolongdiv/pi_2_nolongdiv.3
+pi_3/pi_3_unroll.3
+pinout/insmix3/pi.3
+pi_pinki_3/pi_0_nolongdiv_divmacro.3
+pi_pinki_3/pi_2.3
+pi_pinki_3/pi_nolongdiv_divmacro.3
