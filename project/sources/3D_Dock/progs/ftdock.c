@@ -142,6 +142,9 @@ int main( int argc , char *argv[] ) {
   printf( "          http://www.bmm.icnet.uk/\n\n" ) ;
 
 
+	printf("  ULTRA UPGRADED BY PINKII AND PNKTHREPWOOD!!!\n\n");
+
+
   printf( "Starting FTDock (v2.0) global search program\n" ) ;
 
 
@@ -151,9 +154,10 @@ int main( int argc , char *argv[] ) {
 
   if( ( ( output_file_name  = ( char * ) malloc ( 500 * sizeof( char ) ) ) == NULL ) ||
       ( ( static_file_name  = ( char * ) malloc ( 500 * sizeof( char ) ) ) == NULL ) ||
-      ( ( mobile_file_name  = ( char * ) malloc ( 500 * sizeof( char ) ) ) == NULL ) ) {
-    GENERAL_MEMORY_PROBLEM 
-  }
+      ( ( mobile_file_name  = ( char * ) malloc ( 500 * sizeof( char ) ) ) == NULL ) ) 
+	{
+		GENERAL_MEMORY_PROBLEM 
+ 	}
 
 /************/
 
@@ -486,8 +490,11 @@ int main( int argc , char *argv[] ) {
                                FFTW_COMPLEX_TO_REAL , FFTW_ESTIMATE| FFTW_IN_PLACE ) ;
 
 /************/
+	clock_t pca_timing_start, pca_timing_end;
 
   printf( "PCA TIMING SHOULD start here\n");
+
+	pca_timing_start = clock();
 
   printf( "Setting up Static Structure\n" ) ;
 
@@ -751,8 +758,18 @@ int main( int argc , char *argv[] ) {
   }
   free( Origin_Mobile_Structure.Residue ) ;
 
-      /* PCA: Finishing programm here*/ 
+      /* PCA: Finishing program here*/ 
       printf("PCA TIMING SHOULD stop here\n");
+
+		pca_timing_end = clock();
+
+	double pca_time_spent = (double)(pca_timing_end - pca_timing_start) / CLOCKS_PER_SEC;
+
+
+	printf("\nPCA Timing: Ha trigat %f segons\n", pca_time_spent);
+
+
+
       printf("PCA STOPS HERE\n");
       return 0;
       /* PCA: */

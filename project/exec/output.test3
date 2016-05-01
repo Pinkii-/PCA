@@ -1,0 +1,31 @@
+
+          3D-Dock Suite (March 2001)
+          Copyright (C) 1997-2000 Gidon Moont
+          This program comes with ABSOLUTELY NO WARRANTY
+          for details see license. This program is free software,
+          and you may redistribute it under certain conditions.
+
+          Biomolecular Modelling Laboratory
+          Imperial Cancer Research Fund
+          44 Lincoln's Inn Fields
+          London WC2A 3PX
+          +44 (0)20 7269 3348
+          http://www.bmm.icnet.uk/
+
+  ULTRA UPGRADED BY PINKII AND PNKTHREPWOOD!!!
+
+Starting FTDock (v2.0) global search program
+  reading parsed pdb file: ../inputs/4hhb.parsed
+  reading parsed pdb file: ../inputs/5pti.parsed
+Total number of rotations is 9240
+Assigning charges
+Using automatic calculation for grid size
+Span = 111.161 angstroms
+Grid size = 158
+Each Grid cube = 0.70355 angstroms
+Electrostatics are on
+Creating plans
+PCA TIMING SHOULD start here
+Setting up Static Structure
+  surfacing grid
+  electric field calculations ( one dot / grid sheet ) ............................................................................................................................................
