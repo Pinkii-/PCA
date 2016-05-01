@@ -36,7 +36,8 @@ util.o: util.c /usr/include/stdc-predef.h bench.h bench-user.h \
  /usr/include/x86_64-linux-gnu/bits/nan.h \
  /usr/include/x86_64-linux-gnu/bits/mathdef.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h /usr/include/malloc.h
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/x86_64-linux-gnu/bits/math-finite.h /usr/include/malloc.h
 
 /usr/include/stdc-predef.h:
 
@@ -137,5 +138,7 @@ bench-user.h:
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathinline.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-finite.h:
 
 /usr/include/malloc.h:

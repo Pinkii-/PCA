@@ -93,27 +93,27 @@ gcc: fatal error: no input files
 compilation terminated.
 configure:4134: $? = 4
 configure:4154: checking whether the C compiler works
-configure:4176: gcc -O3 -march=native   conftest.c  >&5
+configure:4176: gcc    conftest.c  >&5
 configure:4180: $? = 0
 configure:4228: result: yes
 configure:4231: checking for C compiler default output file name
 configure:4233: result: a.out
 configure:4239: checking for suffix of executables
-configure:4246: gcc -o conftest -O3 -march=native   conftest.c  >&5
+configure:4246: gcc -o conftest    conftest.c  >&5
 configure:4250: $? = 0
 configure:4272: result: 
 configure:4294: checking whether we are cross compiling
-configure:4302: gcc -o conftest -O3 -march=native   conftest.c  >&5
+configure:4302: gcc -o conftest    conftest.c  >&5
 configure:4306: $? = 0
 configure:4313: ./conftest
 configure:4317: $? = 0
 configure:4332: result: no
 configure:4337: checking for suffix of object files
-configure:4359: gcc -c -O3 -march=native  conftest.c >&5
+configure:4359: gcc -c   conftest.c >&5
 configure:4363: $? = 0
 configure:4384: result: o
 configure:4388: checking whether we are using the GNU C compiler
-configure:4407: gcc -c -O3 -march=native  conftest.c >&5
+configure:4407: gcc -c   conftest.c >&5
 configure:4407: $? = 0
 configure:4416: result: yes
 configure:4425: checking whether gcc accepts -g
@@ -121,7 +121,7 @@ configure:4445: gcc -c -g  conftest.c >&5
 configure:4445: $? = 0
 configure:4486: result: yes
 configure:4503: checking for gcc option to accept ISO C89
-configure:4566: gcc  -c -O3 -march=native  conftest.c >&5
+configure:4566: gcc  -c -g -O2  conftest.c >&5
 configure:4566: $? = 0
 configure:4579: result: none needed
 configure:4604: checking whether gcc understands -c and -o together
@@ -135,7 +135,7 @@ configure:4697: result: GNU
 configure:4723: checking dependency style of gcc
 configure:4834: result: gcc3
 configure:4852: checking for C compiler vendor
-configure:4876: gcc -c -O3 -march=native  conftest.c >&5
+configure:4876: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:20:7: error: 'thisisanerror' undeclared (first use in this function)
        thisisanerror;
@@ -168,7 +168,7 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:4876: gcc -c -O3 -march=native  conftest.c >&5
+configure:4876: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:20:7: error: 'thisisanerror' undeclared (first use in this function)
        thisisanerror;
@@ -201,7 +201,7 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:4876: gcc -c -O3 -march=native  conftest.c >&5
+configure:4876: gcc -c -g -O2  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:20:7: error: 'thisisanerror' undeclared (first use in this function)
        thisisanerror;
@@ -234,11 +234,11 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:4876: gcc -c -O3 -march=native  conftest.c >&5
+configure:4876: gcc -c -g -O2  conftest.c >&5
 configure:4876: $? = 0
 configure:4883: result: gnu
 configure:4890: checking for gcc option to accept ISO C99
-configure:5039: gcc  -c -O3 -march=native  conftest.c >&5
+configure:5039: gcc  -c -g -O2  conftest.c >&5
 conftest.c:64:29: error: expected ';', ',' or ')' before 'text'
  test_restrict (ccp restrict text)
                              ^
@@ -403,7 +403,7 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:5039: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:5039: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:5039: $? = 0
 configure:5059: result: -std=gnu99
 configure:5160: checking for gcc -std=gnu99 option to accept ISO Standard C
@@ -429,7 +429,7 @@ configure:6016: result: yes
 configure:6028: checking for BSD- or MS-compatible name lister (nm)
 configure:6077: result: /usr/bin/nm -B
 configure:6207: checking the name lister (/usr/bin/nm -B) interface
-configure:6214: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:6214: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:6217: /usr/bin/nm -B "conftest.o"
 configure:6220: output
 0000000000000000 B some_variable
@@ -458,7 +458,7 @@ configure:7075: checking for ar
 configure:7091: found /usr/bin/ar
 configure:7102: result: ar
 configure:7139: checking for archiver @FILE support
-configure:7156: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:7156: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:7156: $? = 0
 configure:7159: ar cru libconftest.a @conftest.lst >&5
 configure:7162: $? = 0
@@ -473,16 +473,16 @@ configure:7339: checking for ranlib
 configure:7355: found /usr/bin/ranlib
 configure:7366: result: ranlib
 configure:7468: checking command to parse /usr/bin/nm -B output from gcc -std=gnu99 object
-configure:7588: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:7588: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:7591: $? = 0
 configure:7595: /usr/bin/nm -B conftest.o \| sed -n -e 's/^.*[ ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ ][ ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p' | sed '/ __gnu_lto/d' \> conftest.nm
 configure:7598: $? = 0
-configure:7664: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c conftstm.o >&5
+configure:7664: gcc -std=gnu99 -o conftest -g -O2   conftest.c conftstm.o >&5
 configure:7667: $? = 0
 configure:7705: result: ok
 configure:7742: checking for sysroot
 configure:7772: result: no
-configure:7849: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:7849: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:7852: $? = 0
 configure:8028: checking for mt
 configure:8044: found /bin/mt
@@ -539,70 +539,70 @@ configure: failed program was:
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
 configure:8867: checking for ANSI C header files
-configure:8887: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8887: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8887: $? = 0
-configure:8960: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:8960: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
 configure:8960: $? = 0
 configure:8960: ./conftest
 configure:8960: $? = 0
 configure:8971: result: yes
 configure:8984: checking for sys/types.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for sys/stat.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for stdlib.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for string.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for memory.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for strings.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for inttypes.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for stdint.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8984: checking for unistd.h
-configure:8984: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8984: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8984: $? = 0
 configure:8984: result: yes
 configure:8998: checking for dlfcn.h
-configure:8998: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:8998: gcc -std=gnu99 -c -g -O2  conftest.c >&5
 configure:8998: $? = 0
 configure:8998: result: yes
 configure:9172: checking for objdir
 configure:9187: result: .libs
 configure:9458: checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions
-configure:9476: gcc -std=gnu99 -c -O3 -march=native  -fno-rtti -fno-exceptions conftest.c >&5
+configure:9476: gcc -std=gnu99 -c -g -O2  -fno-rtti -fno-exceptions conftest.c >&5
 cc1: warning: command line option '-fno-rtti' is valid for C++/ObjC++ but not for C [enabled by default]
 configure:9480: $? = 0
 configure:9493: result: no
 configure:9820: checking for gcc -std=gnu99 option to produce PIC
 configure:9827: result: -fPIC -DPIC
 configure:9835: checking if gcc -std=gnu99 PIC flag -fPIC -DPIC works
-configure:9853: gcc -std=gnu99 -c -O3 -march=native  -fPIC -DPIC -DPIC conftest.c >&5
+configure:9853: gcc -std=gnu99 -c -g -O2  -fPIC -DPIC -DPIC conftest.c >&5
 configure:9857: $? = 0
 configure:9870: result: yes
 configure:9899: checking if gcc -std=gnu99 static flag -static works
 configure:9927: result: yes
 configure:9942: checking if gcc -std=gnu99 supports -c -o file.o
-configure:9963: gcc -std=gnu99 -c -O3 -march=native  -o out/conftest2.o conftest.c >&5
+configure:9963: gcc -std=gnu99 -c -g -O2  -o out/conftest2.o conftest.c >&5
 configure:9967: $? = 0
 configure:9989: result: yes
 configure:9997: checking if gcc -std=gnu99 supports -c -o file.o
@@ -610,7 +610,7 @@ configure:10044: result: yes
 configure:10077: checking whether the gcc -std=gnu99 linker (/usr/bin/ld -m elf_x86_64) supports shared libraries
 configure:11230: result: yes
 configure:11470: checking dynamic linker characteristics
-configure:11981: gcc -std=gnu99 -o conftest -O3 -march=native   -Wl,-rpath -Wl,/foo conftest.c  >&5
+configure:11981: gcc -std=gnu99 -o conftest -g -O2   -Wl,-rpath -Wl,/foo conftest.c  >&5
 configure:11981: $? = 0
 configure:12203: result: GNU/Linux ld.so
 configure:12310: checking how to hardcode library paths into programs
@@ -625,10 +625,34 @@ configure:12944: checking whether to build static libraries
 configure:12948: result: yes
 configure:12988: checking for ocamlbuild
 configure:13018: result: no
+configure:13501: checking whether C compiler accepts -mtune=native
+configure:13520: gcc -std=gnu99 -c -mtune=native  conftest.c >&5
+configure:13520: $? = 0
+configure:13530: result: yes
+configure:13540: checking whether C compiler accepts -malign-double
+configure:13559: gcc -std=gnu99 -c -malign-double  conftest.c >&5
+configure:13559: $? = 0
+configure:13569: result: yes
+configure:13579: checking whether C compiler accepts -fstrict-aliasing
+configure:13598: gcc -std=gnu99 -c -fstrict-aliasing  conftest.c >&5
+configure:13598: $? = 0
+configure:13608: result: yes
+configure:13625: checking whether C compiler accepts -fno-schedule-insns
+configure:13644: gcc -std=gnu99 -c -fno-schedule-insns  conftest.c >&5
+configure:13644: $? = 0
+configure:13654: result: yes
+configure:13664: checking whether C compiler accepts -ffast-math
+configure:13683: gcc -std=gnu99 -c -ffast-math  conftest.c >&5
+configure:13683: $? = 0
+configure:13693: result: yes
+configure:13716: checking whether C compiler accepts -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math
+configure:13731: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
+configure:13731: $? = 0
+configure:13739: result: yes
 configure:14168: checking for ANSI C header files
 configure:14272: result: yes
 configure:14283: checking libintl.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14283: $? = 0
 configure:14283: result: yes
 configure:14283: checking libintl.h presence
@@ -638,7 +662,7 @@ configure:14283: result: yes
 configure:14283: checking for libintl.h
 configure:14283: result: yes
 configure:14283: checking malloc.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14283: $? = 0
 configure:14283: result: yes
 configure:14283: checking malloc.h presence
@@ -648,7 +672,7 @@ configure:14283: result: yes
 configure:14283: checking for malloc.h
 configure:14283: result: yes
 configure:14283: checking stddef.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14283: $? = 0
 configure:14283: result: yes
 configure:14283: checking stddef.h presence
@@ -664,7 +688,7 @@ configure:14283: result: yes
 configure:14283: checking for strings.h
 configure:14283: result: yes
 configure:14283: checking sys/time.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14283: $? = 0
 configure:14283: result: yes
 configure:14283: checking sys/time.h presence
@@ -676,7 +700,7 @@ configure:14283: result: yes
 configure:14283: checking for unistd.h
 configure:14283: result: yes
 configure:14283: checking limits.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14283: $? = 0
 configure:14283: result: yes
 configure:14283: checking limits.h presence
@@ -686,7 +710,7 @@ configure:14283: result: yes
 configure:14283: checking for limits.h
 configure:14283: result: yes
 configure:14283: checking c_asm.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c:69:19: fatal error: c_asm.h: No such file or directory
  #include <c_asm.h>
                    ^
@@ -811,7 +835,7 @@ configure:14283: result: no
 configure:14283: checking for c_asm.h
 configure:14283: result: no
 configure:14283: checking intrinsics.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c:69:24: fatal error: intrinsics.h: No such file or directory
  #include <intrinsics.h>
                         ^
@@ -938,7 +962,7 @@ configure:14283: result: no
 configure:14283: checking for stdint.h
 configure:14283: result: yes
 configure:14283: checking mach/mach_time.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c:70:28: fatal error: mach/mach_time.h: No such file or directory
  #include <mach/mach_time.h>
                             ^
@@ -1065,7 +1089,7 @@ configure:14283: result: no
 configure:14283: checking for mach/mach_time.h
 configure:14283: result: no
 configure:14283: checking sys/sysctl.h usability
-configure:14283: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14283: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14283: $? = 0
 configure:14283: result: yes
 configure:14283: checking sys/sysctl.h presence
@@ -1075,7 +1099,7 @@ configure:14283: result: yes
 configure:14283: checking for sys/sysctl.h
 configure:14283: result: yes
 configure:14300: checking altivec.h usability
-configure:14300: gcc -std=gnu99 -c -O3 -march=native    conftest.c >&5
+configure:14300: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math    conftest.c >&5
 conftest.c:71:21: fatal error: altivec.h: No such file or directory
  #include <altivec.h>
                      ^
@@ -1204,17 +1228,17 @@ configure:14300: result: no
 configure:14300: checking for altivec.h
 configure:14300: result: no
 configure:14314: checking for an ANSI C-conforming const
-configure:14380: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14380: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14380: $? = 0
 configure:14387: result: yes
 configure:14395: checking for inline
-configure:14411: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14411: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14411: $? = 0
 configure:14419: result: inline
 configure:14437: checking for size_t
-configure:14437: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14437: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14437: $? = 0
-configure:14437: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14437: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:74:21: error: expected expression before ')' token
  if (sizeof ((size_t)))
@@ -1301,13 +1325,13 @@ configure: failed program was:
 | }
 configure:14437: result: yes
 configure:14448: checking whether time.h and sys/time.h may both be included
-configure:14468: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14468: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14468: $? = 0
 configure:14475: result: yes
 configure:14483: checking for long double
-configure:14483: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14483: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14483: $? = 0
-configure:14483: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14483: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:75:26: error: expected expression before ')' token
  if (sizeof ((long double)))
@@ -1395,7 +1419,7 @@ configure: failed program was:
 | }
 configure:14483: result: yes
 configure:14496: checking for hrtime_t
-configure:14496: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14496: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:49:13: error: 'hrtime_t' undeclared (first use in this function)
  if (sizeof (hrtime_t))
@@ -1458,57 +1482,57 @@ configure: failed program was:
 | }
 configure:14496: result: no
 configure:14513: checking size of int
-configure:14518: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14518: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14518: $? = 0
 configure:14518: ./conftest
 configure:14518: $? = 0
 configure:14532: result: 4
 configure:14546: checking size of unsigned int
-configure:14551: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14551: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14551: $? = 0
 configure:14551: ./conftest
 configure:14551: $? = 0
 configure:14565: result: 4
 configure:14579: checking size of long
-configure:14584: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14584: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14584: $? = 0
 configure:14584: ./conftest
 configure:14584: $? = 0
 configure:14598: result: 8
 configure:14612: checking size of unsigned long
-configure:14617: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14617: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14617: $? = 0
 configure:14617: ./conftest
 configure:14617: $? = 0
 configure:14631: result: 8
 configure:14645: checking size of long long
-configure:14650: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14650: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14650: $? = 0
 configure:14650: ./conftest
 configure:14650: $? = 0
 configure:14664: result: 8
 configure:14678: checking size of unsigned long long
-configure:14683: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14683: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14683: $? = 0
 configure:14683: ./conftest
 configure:14683: $? = 0
 configure:14697: result: 8
 configure:14711: checking size of size_t
-configure:14716: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14716: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14716: $? = 0
 configure:14716: ./conftest
 configure:14716: $? = 0
 configure:14730: result: 8
 configure:14744: checking size of ptrdiff_t
-configure:14749: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14749: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14749: $? = 0
 configure:14749: ./conftest
 configure:14749: $? = 0
 configure:14763: result: 8
 configure:14774: checking for uintptr_t
-configure:14774: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14774: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:14774: $? = 0
-configure:14774: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:14774: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:88:24: error: expected expression before ')' token
  if (sizeof ((uintptr_t)))
@@ -1609,47 +1633,47 @@ configure: failed program was:
 | }
 configure:14774: result: yes
 configure:14827: checking size of float
-configure:14832: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14832: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14832: $? = 0
 configure:14832: ./conftest
 configure:14832: $? = 0
 configure:14846: result: 4
 configure:14860: checking size of double
-configure:14865: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14865: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14865: $? = 0
 configure:14865: ./conftest
 configure:14865: $? = 0
 configure:14879: result: 8
 configure:14894: checking size of fftw_r2r_kind
-configure:14899: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14899: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14899: $? = 0
 configure:14899: ./conftest
 configure:14899: $? = 0
 configure:14918: result: 4
 configure:14934: checking for working alloca.h
-configure:14951: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:14951: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:14951: $? = 0
 configure:14959: result: yes
 configure:14967: checking for alloca
-configure:15004: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:15004: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:15004: $? = 0
 configure:15012: result: yes
 configure:15118: checking for working strtod
-configure:15159: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:15159: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 configure:15159: $? = 0
 configure:15159: ./conftest
 configure:15159: $? = 0
 configure:15169: result: yes
 configure:15233: checking for vprintf
-configure:15233: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
+configure:15233: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
 conftest.c:77:6: warning: conflicting types for built-in function 'vprintf' [enabled by default]
  char vprintf ();
       ^
 configure:15233: $? = 0
 configure:15233: result: yes
 configure:15239: checking for _doprnt
-configure:15239: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c  >&5
-/tmp/cclUztXm.o: In function `main':
+configure:15239: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c  >&5
+/tmp/cc0rv7Ms.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `_doprnt'
 collect2: error: ld returned 1 exit status
 configure:15239: $? = 1
@@ -1748,15 +1772,15 @@ configure: failed program was:
 | }
 configure:15239: result: no
 configure:15250: checking for sin in -lm
-configure:15275: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm   >&5
+configure:15275: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm   >&5
 conftest.c:62:6: warning: conflicting types for built-in function 'sin' [enabled by default]
  char sin ();
       ^
 configure:15275: $? = 0
 configure:15284: result: yes
 configure:15389: checking for BSDgettimeofday
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
-/tmp/cco1mctg.o: In function `main':
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
+/tmp/ccAM6Aoy.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `BSDgettimeofday'
 collect2: error: ld returned 1 exit status
 configure:15389: $? = 1
@@ -1856,12 +1880,12 @@ configure: failed program was:
 | }
 configure:15389: result: no
 configure:15389: checking for gettimeofday
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for gethrtime
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
-/tmp/cc05suRo.o: In function `main':
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
+/tmp/cc6LRZ5C.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `gethrtime'
 collect2: error: ld returned 1 exit status
 configure:15389: $? = 1
@@ -1962,8 +1986,8 @@ configure: failed program was:
 | }
 configure:15389: result: no
 configure:15389: checking for read_real_time
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
-/tmp/ccUEn0nr.o: In function `main':
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
+/tmp/ccoFc1CF.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `read_real_time'
 collect2: error: ld returned 1 exit status
 configure:15389: $? = 1
@@ -2064,8 +2088,8 @@ configure: failed program was:
 | }
 configure:15389: result: no
 configure:15389: checking for time_base_to_time
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
-/tmp/ccImb6At.o: In function `main':
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
+/tmp/cc4iEuaI.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `time_base_to_time'
 collect2: error: ld returned 1 exit status
 configure:15389: $? = 1
@@ -2166,34 +2190,34 @@ configure: failed program was:
 | }
 configure:15389: result: no
 configure:15389: checking for drand48
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for sqrt
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 conftest.c:81:6: warning: conflicting types for built-in function 'sqrt' [enabled by default]
  char sqrt ();
       ^
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for memset
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 conftest.c:82:6: warning: conflicting types for built-in function 'memset' [enabled by default]
  char memset ();
       ^
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for posix_memalign
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for memalign
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for _mm_malloc
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
-/tmp/ccWere8I.o: In function `main':
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
+/tmp/ccg05SfW.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `_mm_malloc'
 collect2: error: ld returned 1 exit status
 configure:15389: $? = 1
@@ -2299,8 +2323,8 @@ configure: failed program was:
 | }
 configure:15389: result: no
 configure:15389: checking for _mm_free
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
-/tmp/ccszfSeL.o: In function `main':
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
+/tmp/ccwSH3ZY.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `_mm_free'
 collect2: error: ld returned 1 exit status
 configure:15389: $? = 1
@@ -2406,12 +2430,12 @@ configure: failed program was:
 | }
 configure:15389: result: no
 configure:15389: checking for clock_gettime
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for mach_absolute_time
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
-/tmp/ccQyawHT.o: In function `main':
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
+/tmp/cc0cid93.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `mach_absolute_time'
 collect2: error: ld returned 1 exit status
 configure:15389: $? = 1
@@ -2518,47 +2542,47 @@ configure: failed program was:
 | }
 configure:15389: result: no
 configure:15389: checking for sysctl
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for abort
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 conftest.c:87:6: warning: conflicting types for built-in function 'abort' [enabled by default]
  char abort ();
       ^
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for sinl
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 conftest.c:88:6: warning: conflicting types for built-in function 'sinl' [enabled by default]
  char sinl ();
       ^
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for cosl
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 conftest.c:89:6: warning: conflicting types for built-in function 'cosl' [enabled by default]
  char cosl ();
       ^
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15389: checking for snprintf
-configure:15389: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15389: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 conftest.c:90:6: warning: conflicting types for built-in function 'snprintf' [enabled by default]
  char snprintf ();
       ^
 configure:15389: $? = 0
 configure:15389: result: yes
 configure:15398: checking whether sinl is declared
-configure:15398: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15398: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:15398: $? = 0
 configure:15398: result: yes
 configure:15409: checking whether cosl is declared
-configure:15409: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15409: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:15409: $? = 0
 configure:15409: result: yes
 configure:15420: checking whether sinq is declared
-configure:15420: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15420: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:79:10: error: 'sinq' undeclared (first use in this function)
    (void) sinq;
@@ -2653,7 +2677,7 @@ configure: failed program was:
 | }
 configure:15420: result: no
 configure:15431: checking whether cosq is declared
-configure:15431: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15431: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 conftest.c: In function 'main':
 conftest.c:80:10: error: 'cosq' undeclared (first use in this function)
    (void) cosq;
@@ -2749,28 +2773,28 @@ configure: failed program was:
 | }
 configure:15431: result: no
 configure:15443: checking whether memalign is declared
-configure:15443: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15443: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:15443: $? = 0
 configure:15443: result: yes
 configure:15458: checking whether drand48 is declared
-configure:15458: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15458: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:15458: $? = 0
 configure:15458: result: yes
 configure:15468: checking whether srand48 is declared
-configure:15468: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15468: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:15468: $? = 0
 configure:15468: result: yes
 configure:15478: checking whether posix_memalign is declared
-configure:15478: gcc -std=gnu99 -c -O3 -march=native  conftest.c >&5
+configure:15478: gcc -std=gnu99 -c -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math  conftest.c >&5
 configure:15478: $? = 0
 configure:15478: result: yes
 configure:15489: checking for _rtc intrinsic
-configure:15505: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15505: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 conftest.c: In function 'main':
 conftest.c:82:1: warning: implicit declaration of function '_rtc' [-Wimplicit-function-declaration]
  _rtc()
  ^
-/tmp/ccIPD6iu.o: In function `main':
+/tmp/cc97cEQt.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `_rtc'
 collect2: error: ld returned 1 exit status
 configure:15505: $? = 1
@@ -2862,7 +2886,7 @@ configure: failed program was:
 | }
 configure:15514: result: no
 configure:15534: checking for isnan
-configure:15548: gcc -std=gnu99 -o conftest -O3 -march=native   conftest.c -lm  >&5
+configure:15548: gcc -std=gnu99 -o conftest -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math   conftest.c -lm  >&5
 configure:15548: $? = 0
 configure:15560: result: yes
 configure:15567: checking whether C compiler accepts -mpreferred-stack-boundary=4
@@ -2871,8 +2895,6 @@ configure:15586: $? = 0
 configure:15596: result: yes
 configure:15600: checking whether the stack is at least 8-byte aligned by gcc
 configure:15604: checking whether C compiler accepts -malign-double
-configure:15623: gcc -std=gnu99 -c -malign-double  conftest.c >&5
-configure:15623: $? = 0
 configure:15633: result: yes
 configure:15695: gcc -std=gnu99 -o conftest -O -malign-double   conftest.c -lm  >&5
 configure:15695: $? = 0
@@ -3030,6 +3052,7 @@ config.status:1273: creating tools/fftw-wisdom-to-conf
 config.status:1273: creating m4/Makefile
 config.status:1273: creating fftw.pc
 config.status:1273: creating config.h
+config.status:1454: config.h is unchanged
 config.status:1502: executing depfiles commands
 config.status:1502: executing libtool commands
 
@@ -3043,8 +3066,8 @@ ac_cv_c_const=yes
 ac_cv_c_inline=inline
 ac_cv_env_CC_set=
 ac_cv_env_CC_value=
-ac_cv_env_CFLAGS_set=set
-ac_cv_env_CFLAGS_value='-O3 -march=native'
+ac_cv_env_CFLAGS_set=
+ac_cv_env_CFLAGS_value=
 ac_cv_env_CPPFLAGS_set=
 ac_cv_env_CPPFLAGS_value=
 ac_cv_env_CPP_set=
@@ -3163,8 +3186,13 @@ am_cv_CC_dependencies_compiler_type=gcc3
 am_cv_make_support_nested_variables=yes
 am_cv_prog_cc_c_o=yes
 ax_cv_c_compiler_vendor=gnu
+ax_cv_c_flags__O3__fomit_frame_pointer__mtune_native__malign_double__fstrict_aliasing__fno_schedule_insns__ffast_math=yes
+ax_cv_c_flags__ffast_math=yes
+ax_cv_c_flags__fno_schedule_insns=yes
+ax_cv_c_flags__fstrict_aliasing=yes
 ax_cv_c_flags__malign_double=yes
 ax_cv_c_flags__mpreferred_stack_boundary_4=yes
+ax_cv_c_flags__mtune_native=yes
 lt_cv_ar_at_file=@
 lt_cv_deplibs_check_method=pass_all
 lt_cv_file_magic_cmd='$MAGIC_CMD'
@@ -3215,7 +3243,7 @@ AVX_CFLAGS=''
 AWK='mawk'
 CC='gcc -std=gnu99'
 CCDEPMODE='depmode=gcc3'
-CFLAGS='-O3 -march=native'
+CFLAGS='-O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math'
 CHECK_PL_OPTS=''
 COMBINED_THREADS_FALSE=''
 COMBINED_THREADS_TRUE='#'
@@ -3447,6 +3475,6 @@ target_alias=''
 #define HAVE_DECL_SRAND48 1
 #define HAVE_DECL_POSIX_MEMALIGN 1
 #define HAVE_ISNAN 1
-#define FFTW_CC "gcc -std=gnu99 -O3 -march=native"
+#define FFTW_CC "gcc -std=gnu99 -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math"
 
 configure: exit 0

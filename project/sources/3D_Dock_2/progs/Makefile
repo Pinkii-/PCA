@@ -25,10 +25,10 @@ SHELL           = /bin/sh
 
 CC              = gcc
 
-CC_FLAGS        = -O3 -march=native -pg -g -static 
+CC_FLAGS        = -O3 -march=native -pg -g -static -std=gnu99
 STRIP           = strip
 
-CC_LINKERS      = -lm
+CC_LINKERS      = -lm 
 
 SECURITY	= chmod 555
 
@@ -38,7 +38,7 @@ SECURITY	= chmod 555
 
 CC_FLAGS_FULL	= -I$(FFTW_DIR)/include $(CC_FLAGS)
 #FFTW_LINKERS    = -L$(FFTW_DIR)/lib -lrfftw -lfftw #FFTW2
-FFTW_LINKERS    = -L$(FFTW_DIR)/lib -lfftw3f 
+FFTW_LINKERS    = -L$(FFTW_DIR)/lib -lfftw3f -lm
 
 #############
 
@@ -58,7 +58,7 @@ all:		$(PROGRAMS)
 #############
 
 ftdock:		ftdock.o $(LIBRARY_OBJECTS) structures.h
-		$(CC) $(CC_FLAGS_FULL) -o $@ ftdock.o $(LIBRARY_OBJECTS) $(FFTW_LINKERS) $(CC_LINKERS)
+		$(CC) $(CC_FLAGS_FULL) -o $@ ftdock.o $(LIBRARY_OBJECTS) $(CC_LINKERS) $(FFTW_LINKERS)
 #		$(STRIP) $@
 		$(SECURITY) $@
 

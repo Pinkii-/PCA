@@ -185,11 +185,14 @@ int main( int argc , char *argv[] ) {
 
   /* Command Line parse */
 
-  for( i = 1 ; i < argc ; i ++ ) {
+  for( i = 1 ; i < argc ; i ++ ) 
+	{
 
-    if( strcmp( argv[i] , "-out" ) == 0 ) {
+    if( strcmp( argv[i] , "-out" ) == 0 ) 
+	{
       i ++ ;
-      if( ( i == argc ) || ( strncmp( argv[i] , "-" , 1 ) == 0 ) ) {
+      if( ( i == argc ) || ( strncmp( argv[i] , "-" , 1 ) == 0 ) ) 
+		{
         printf( "Bad command line\n" ) ;
         exit( EXIT_FAILURE ) ;
       }
@@ -332,14 +335,16 @@ int main( int argc , char *argv[] ) {
 
     fclose( ftdock_file ) ;
 
-    if( ( ftdock_file = fopen( "scratch_scores.dat" , "r" ) ) == NULL ) {
+    if( ( ftdock_file = fopen( "scratch_scores.dat" , "r" ) ) == NULL ) 
+	{
       printf( "Could not open scratch_scores.dat for reading.\nDying\n\n" ) ;
       exit( EXIT_FAILURE ) ;
     }
 
     fgets( line_buffer , 99 , ftdock_file ) ;
 
-    while( fgets( line_buffer , 99 , ftdock_file ) ) {
+    while( fgets( line_buffer , 99 , ftdock_file ) ) 
+	{
 
       sscanf( line_buffer , "G_DATA %d " , &first_rotation ) ;
 
@@ -353,11 +358,13 @@ int main( int argc , char *argv[] ) {
 
 /************/
 
-  } else {
+  	} 
+	else 
+	{
 
-    first_rotation = 1 ;
+    	first_rotation = 1 ;
 
-  }
+  	}
 
 /************/
 
@@ -367,7 +374,8 @@ int main( int argc , char *argv[] ) {
   Static_Structure = read_pdb_to_structure( static_file_name ) ;
   Mobile_Structure = read_pdb_to_structure( mobile_file_name ) ;
 
-  if( Mobile_Structure.length > Static_Structure.length ) {
+  if ( Mobile_Structure.length > Static_Structure.length ) 
+  {
     printf( "WARNING\n" ) ;
     printf( "The mobile molecule has more residues than the static\n" ) ;
     printf( "Are you sure you have the correct molecules?\n" ) ;
@@ -385,7 +393,8 @@ int main( int argc , char *argv[] ) {
 
   /* Assign charges */
 
-  if( electrostatics == 1 ) {
+  if( electrostatics == 1 ) 
+  {
     printf( "Assigning charges\n" ) ;
     assign_charges( Static_Structure ) ;
     assign_charges( Mobile_Structure ) ;
@@ -496,24 +505,24 @@ int main( int argc , char *argv[] ) {
 	//FFTW3
 	if (electrostatics == 1)
 	{
-  p    = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+  p    = sfftw_plan_dft_r2c_3d__( global_grid_size , global_grid_size , global_grid_size ,
 								static_elec_grid, static_elec_grid, FFTW_ESTIMATE);
 	}
 	else
 	{
-  p    = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+  p    = sfftw_plan_dft_r2c_3d__( global_grid_size , global_grid_size , global_grid_size ,
 								static_grid, static_grid, FFTW_ESTIMATE);
 	}
 
 
 	if (electrostatics == 1)
 	{
-  pinv = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+  pinv = sfftw_plan_dft_r2c_3d__( global_grid_size , global_grid_size , global_grid_size ,
                                static_elec_grid, static_elec_grid, FFTW_ESTIMATE) ;
 	}
 	else
 	{
-  pinv = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+  pinv = sfftw_plan_dft_r2c_3d__( global_grid_size , global_grid_size , global_grid_size ,
                                static_grid, static_grid, FFTW_ESTIMATE) ;
 	}
 
@@ -540,10 +549,11 @@ int main( int argc , char *argv[] ) {
 
   /* Fourier Transform the static grids (need do only once) */
   printf( "  one time forward FFT calculations\n" ) ;
-  rfftwnd_one_real_to_complex( p , static_grid , NULL ) ;
-  if( electrostatics == 1 ) {
-    rfftwnd_one_real_to_complex( p , static_elec_grid , NULL ) ;
-  }
+  //rfftwnd_one_real_to_complex( p , static_grid , NULL ) ;
+	sfftw_execute__(p);
+//  if( electrostatics == 1 ) {
+    //rfftwnd_one_real_to_complex( p , static_elec_grid , NULL ) ;
+//  }
 
   printf( "  done\n" ) ;
 
@@ -612,10 +622,15 @@ int main( int argc , char *argv[] ) {
     }
 
     /* Forward Fourier Transforms */
+
+	sfftw_execute__(p);
+
+/*
     rfftwnd_one_real_to_complex( p , mobile_grid , NULL ) ;
     if( electrostatics == 1 ) {
       rfftwnd_one_real_to_complex( p , mobile_elec_grid , NULL ) ;
     }
+*/
 
 /************/
 
@@ -649,11 +664,15 @@ int main( int argc , char *argv[] ) {
     }
 
     /* Reverse Fourier Transform */
+
+	sfftw_execute__(pinv);
+
+/*
     rfftwnd_one_complex_to_real( pinv , multiple_fsg , NULL ) ;
     if( electrostatics == 1 ) {
       rfftwnd_one_complex_to_real( pinv , multiple_elec_fsg , NULL ) ;
     }
-
+*/
 /************/
 
     /* Get best scores */
@@ -781,8 +800,8 @@ int main( int argc , char *argv[] ) {
 
 //  rfftwnd_destroy_plan( p ) ;
 //  rfftwnd_destroy_plan( pinv ) ;
-	fftw_destroy_plan(p);
-	fftw_destroy_plan(pinv);
+	sfftw_destroy_plan__(p);
+	sfftw_destroy_plan__(pinv);
 
   free( static_grid ) ;
   free( mobile_grid ) ;
