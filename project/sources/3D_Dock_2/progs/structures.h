@@ -36,6 +36,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /************/
 
+
+#define fftw_real double
+
 /* These values directly below may be altered, and the programs rebuilt */
 
 #define MAX_ROTATIONS  100000

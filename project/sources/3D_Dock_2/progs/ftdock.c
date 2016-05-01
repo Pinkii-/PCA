@@ -28,8 +28,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "structures.h"
 
-#define fftw_real double
-
 void print_electric_grid ( /*fftw_real*/double *grid, int grid_size)
 {
   int i, diff;
@@ -107,7 +105,8 @@ int main( int argc , char *argv[] ) {
 
   /* FFTW stuff */
 
-  rfftwnd_plan	p , pinv ;
+  //rfftwnd_plan	p , pinv ; //FFTW2
+  fftw_plan	p , pinv ; //FFTW3
 
   fftw_complex  *static_fsg ;
   fftw_complex  *mobile_fsg ;
@@ -485,10 +484,39 @@ int main( int argc , char *argv[] ) {
   /* Create FFTW plans */
 
   printf( "Creating plans\n" ) ;
+
+	//FFTW2
+/*
   p    = rfftw3d_create_plan( global_grid_size , global_grid_size , global_grid_size ,
                                FFTW_REAL_TO_COMPLEX , FFTW_ESTIMATE| FFTW_IN_PLACE ) ;
   pinv = rfftw3d_create_plan( global_grid_size , global_grid_size , global_grid_size ,
                                FFTW_COMPLEX_TO_REAL , FFTW_ESTIMATE| FFTW_IN_PLACE ) ;
+*/
+
+	//FFTW3
+	if (electrostatics == 1)
+	{
+  p    = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+								static_elec_grid, static_elec_grid, FFTW_ESTIMATE);
+	}
+	else
+	{
+  p    = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+								static_grid, static_grid, FFTW_ESTIMATE);
+	}
+
+
+	if (electrostatics == 1)
+	{
+  pinv = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+                               static_elec_grid, static_elec_grid, FFTW_ESTIMATE) ;
+	}
+	else
+	{
+  pinv = fftw_plan_dft_r2c_3d( global_grid_size , global_grid_size , global_grid_size ,
+                               static_grid, static_grid, FFTW_ESTIMATE) ;
+	}
+
 
 /************/
 	clock_t pca_timing_start, pca_timing_end;
@@ -630,42 +658,48 @@ int main( int argc , char *argv[] ) {
 
     /* Get best scores */
 
-    for( i = 0 ; i < keep_per_rotation ; i ++ ) {
-
+    for( i = 0 ; i < keep_per_rotation ; i ++ ) 
+	{
       Scores[i].score = 0 ;
       Scores[i].rpscore = 0.0 ;
       Scores[i].coord[1] = 0 ;
       Scores[i].coord[2] = 0 ;
       Scores[i].coord[3] = 0 ;
-
     }
 
-    for( x = 0 ; x < global_grid_size ; x ++ ) {
+    for( x = 0 ; x < global_grid_size ; x ++ ) 
+	{
       fx = x ;
       if( fx > ( global_grid_size / 2 ) ) fx -= global_grid_size ;
 
-      for( y = 0 ; y < global_grid_size ; y ++ ) {
+      for( y = 0 ; y < global_grid_size ; y ++ ) 
+	  {
         fy = y ;
         if( fy > ( global_grid_size / 2 ) ) fy -= global_grid_size ;
 
-        for( z = 0 ; z < global_grid_size ; z ++ ) {
+        for( z = 0 ; z < global_grid_size ; z ++ ) 
+		{
           fz = z ;
           if( fz > ( global_grid_size / 2 ) ) fz -= global_grid_size ;
 
           xyz = z + ( 2 * ( global_grid_size / 2 + 1 ) ) * ( y + global_grid_size * x ) ;
 
-          if( ( electrostatics == 0 ) || ( convoluted_elec_grid[xyz] < 0 ) ) {
+          if( ( electrostatics == 0 ) || ( convoluted_elec_grid[xyz] < 0 ) ) 
+		  {
 
             /* Scale factor from FFTs */
-            if( (int)convoluted_grid[xyz] != 0 ) {
+            if( (int)convoluted_grid[xyz] != 0 ) 
+			{
               convoluted_grid[xyz] /= ( global_grid_size * global_grid_size * global_grid_size ) ;
             }
 
-            if( (int)convoluted_grid[xyz] > Scores[keep_per_rotation-1].score ) {
+            if( (int)convoluted_grid[xyz] > Scores[keep_per_rotation-1].score ) 
+			{
 
               i = keep_per_rotation - 2 ;
 
-              while( ( (int)convoluted_grid[xyz] > Scores[i].score ) && ( i >= 0 ) ) {
+              while( ( (int)convoluted_grid[xyz] > Scores[i].score ) && ( i >= 0 ) ) 
+			  {
                 Scores[i+1].score    = Scores[i].score ;
                 Scores[i+1].rpscore  = Scores[i].rpscore ;
                 Scores[i+1].coord[1] = Scores[i].coord[1] ;
@@ -675,9 +709,12 @@ int main( int argc , char *argv[] ) {
               }
 
               Scores[i+1].score    = (int)convoluted_grid[xyz] ;
-              if( ( electrostatics != 0 ) && ( convoluted_elec_grid[xyz] < 0.1 ) ) {
+              if ( ( electrostatics != 0 ) && ( convoluted_elec_grid[xyz] < 0.1 ) ) 
+			  {
                 Scores[i+1].rpscore  = (float)convoluted_elec_grid[xyz] ;
-              } else {
+              } 
+			  else 
+			  {
                 Scores[i+1].rpscore  = (float)0 ;
               }
               Scores[i+1].coord[1] = fx ;
@@ -692,20 +729,25 @@ int main( int argc , char *argv[] ) {
       }
     }
 
-    if( rotation == 1 ) {
-      if( ( ftdock_file = fopen( "scratch_scores.dat" , "w" ) ) == NULL ) {
+    if ( rotation == 1 ) 
+	{
+      if ( ( ftdock_file = fopen( "scratch_scores.dat" , "w" ) ) == NULL ) 
+	  {
         printf( "Could not open scratch_scores.dat for writing.\nDying\n\n" ) ;
         exit( EXIT_FAILURE ) ;
       }
-    } else {
-      if( ( ftdock_file = fopen( "scratch_scores.dat" , "a" ) ) == NULL ) {
+    } 
+    else 
+    {
+      if( ( ftdock_file = fopen( "scratch_scores.dat" , "a" ) ) == NULL ) 
+	  {
         printf( "Could not open scratch_scores.dat for writing.\nDying\n\n" ) ;
         exit( EXIT_FAILURE ) ;
       }
     }
 
-    for( i = 0 ; i < keep_per_rotation ; i ++ ) {
-
+    for( i = 0 ; i < keep_per_rotation ; i ++ ) 
+    {
       max_es_value = min( max_es_value , Scores[i].rpscore ) ;
       /* PCA: start comment
 
@@ -737,8 +779,10 @@ int main( int argc , char *argv[] ) {
 
   /* Free the memory */
 
-  rfftwnd_destroy_plan( p ) ;
-  rfftwnd_destroy_plan( pinv ) ;
+//  rfftwnd_destroy_plan( p ) ;
+//  rfftwnd_destroy_plan( pinv ) ;
+	fftw_destroy_plan(p);
+	fftw_destroy_plan(pinv);
 
   free( static_grid ) ;
   free( mobile_grid ) ;
